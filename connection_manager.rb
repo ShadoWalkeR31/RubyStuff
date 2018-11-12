@@ -65,7 +65,7 @@ class ConnectionManager
 
   def get_connector
     if idx = @pool.index { |connector| not connector.locked? }
-      @pool[idx].set_dummy_lock(dummy_lock)
+      @pool[idx].set_dummy_lock(@dummy_lock)
       return @pool[idx]
     else
       return false
@@ -78,7 +78,7 @@ class ConnectionManager
       sleep pause
       idx = @pool.index { |connector| not connector.locked? }
     end
-    @pool[idx].set_dummy_lock(dummy_lock)
+    @pool[idx].set_dummy_lock(@dummy_lock)
     return @pool[idx]
   end
 
